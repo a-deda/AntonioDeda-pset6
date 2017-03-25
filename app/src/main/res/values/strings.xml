@@ -18,4 +18,9 @@
     <string name="overstappen">Overstappen</string>
     <string name="voer_een_vertrekstation_in">Voer een vertrekstation in</string>
     <string name="voer_een_aankomststation_in">Voer een aankomststation in</string>
+    <string name="geen_beschikbare_reisoptie">Geen beschikbare reisoptie.</string>
+    <string name="tijd">Tijd</string>
+    <string name="station">Station</string>
+    <string name="spoor">Spoor</string>
+    <string name="menu">Menu</string>
 </resources>

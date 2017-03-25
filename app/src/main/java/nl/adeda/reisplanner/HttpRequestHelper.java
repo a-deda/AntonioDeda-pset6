@@ -22,7 +22,7 @@ public class HttpRequestHelper extends AppCompatActivity {
 
         String urlString = "http://webservices.ns.nl/ns-api-treinplanner?" +
                 "fromStation=" + departureTag + "&toStation=" + arrivalTag +
-                "&previousAdvices=0&nextAdvices=0";
+                "&previousAdvices=0&nextAdvices=1";
 
         URL url = new URL(urlString);
 

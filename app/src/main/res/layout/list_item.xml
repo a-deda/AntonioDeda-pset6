@@ -14,12 +14,12 @@
         android:id="@+id/station"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="7"/>
+        android:layout_weight="6.5"/>
 
     <TextView
         android:id="@+id/spoor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_weight="1.5"/>
 
 </LinearLayout>

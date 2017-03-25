@@ -78,7 +78,7 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
         data.setArrival(arrivalStation);
 
         // Start AsyncTask
-        GetInfo asyncTask = new GetInfo(this);
+        GetInfo asyncTask = new GetInfo(this, data);
         asyncTask.execute(data);
     }
 

@@ -10,9 +10,7 @@ public class ReisDirections {
     private String station;
     private String platform;
 
-    public String getTime() {
-        return time;
-    }
+    public String getTime() { return time; }
 
     public void setTime(String time) {
         this.time = time;

@@ -31,9 +31,10 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
 
     Reisplanner reisPlanner;
     View view;
-    ReisData reisData;
+    ReisData data;
 
-    public GetInfo(Reisplanner main) {
+    public GetInfo(Reisplanner main, ReisData data) {
+        this.data = data;
         this.reisPlanner = main;
         view = reisPlanner.getView();
     }
@@ -61,7 +62,7 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
         super.onPostExecute(result);
 
         // TODO: Parse XML
-        DocumentBuilder builder = null;
+        DocumentBuilder builder;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
         Document doc = null;
@@ -73,18 +74,22 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
             e.printStackTrace();
         }
 
-        String changes = "";
+        ReisData parsedData;
+        Bundle bundle = null;
 
         if (doc != null) {
-            XMLParser parser = new XMLParser();
-            parser.parse(doc);
+            parsedData = XMLParser.parse(doc, data);
+
+            bundle = new Bundle();
+            bundle.putSerializable("data", parsedData);
         }
 
-        // Start Reisadvies with ReisData class
+        // Start Reisadvies with parsedData
         Fragment fragment = new Reisadvies();
 
-        Bundle data = new Bundle();
-        // TODO: Put ReisData class into Bundle
+        if (bundle != null) {
+            fragment.setArguments(bundle);
+        }
 
         this.reisPlanner.startFragment(fragment);
 
