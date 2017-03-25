@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme">
+
+    <TextView
+        android:id="@+id/reistijdText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reistijd"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reistijd"
+        android:layout_toEndOf="@id/reistijdText"
+        android:layout_marginStart="@dimen/half_side_margin"/>
+
+    <TextView
+        android:id="@+id/overstappenText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reistijdText"
+        android:layout_marginTop="@dimen/half_side_margin"
+        android:text="@string/overstappen"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/overstappen"
+        android:layout_toEndOf="@id/overstappenText"
+        android:layout_below="@id/reistijd"
+        android:layout_marginTop="@dimen/half_side_margin"
+        android:layout_marginStart="@dimen/half_side_margin"/>
+
+    <ListView
+        android:id="@+id/reisList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/overstappenText"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_add_black_24px" />
+</RelativeLayout>

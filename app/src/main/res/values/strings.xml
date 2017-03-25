@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Reisplanner</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="stations">Stations</string>
+    <string name="reisplanner">Reisplanner</string>
+    <string name="mijn_reizen">Mijn reizen</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plannen">Plannen</string>
+    <string name="vertrek">Vertrek</string>
+    <string name="aankomst">Aankomst</string>
+    <string name="reistijd">Reistijd</string>
+    <string name="overstappen">Overstappen</string>
+    <string name="voer_een_vertrekstation_in">Voer een vertrekstation in</string>
+    <string name="voer_een_aankomststation_in">Voer een aankomststation in</string>
+</resources>

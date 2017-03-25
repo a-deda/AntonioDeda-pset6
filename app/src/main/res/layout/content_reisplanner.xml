@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/AppTheme">
+
+    <EditText
+        android:id="@+id/departureText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/vertrek"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/departureWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/departureText"
+        android:textAllCaps="true"
+        android:text="@string/voer_een_vertrekstation_in"
+        android:textSize="8sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible"/>
+
+    <EditText
+        android:id="@+id/arrivalText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/departureText"
+        android:layout_marginTop="@dimen/half_side_margin"
+        android:hint="@string/aankomst"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/arrivalWarning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/arrivalText"
+        android:textAllCaps="true"
+        android:text="@string/voer_een_aankomststation_in"
+        android:textSize="8sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="invisible" />
+
+
+    <Button
+        android:id="@+id/planButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/arrivalText"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_centerHorizontal="true"
+        android:text="@string/plannen"
+        android:backgroundTint="@color/colorPrimaryLight" />
+    
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>
