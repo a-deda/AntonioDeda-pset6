@@ -1,5 +1,6 @@
 package nl.adeda.reisplanner;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import org.w3c.dom.Text;
 
 /**
@@ -18,7 +22,9 @@ import org.w3c.dom.Text;
 
 public class Reisadvies extends Fragment {
 
+    private DatabaseReference mDatabase;
     ReisData reisData;
+    FloatingActionButton fab;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -30,7 +36,7 @@ public class Reisadvies extends Fragment {
         Bundle bundle = this.getArguments();
         reisData = (ReisData) bundle.getSerializable("data");
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
 
         // No changes indicates a lack of trip information
         if (reisData.getChanges() == null) {
@@ -54,7 +60,7 @@ public class Reisadvies extends Fragment {
 
         // Initialize TextViews
         TextView aantalOverstappen = (TextView) view.findViewById(R.id.overstappen);
-        TextView reistijd = (TextView) view.findViewById(R.id.reistijd);
+        final TextView reistijd = (TextView) view.findViewById(R.id.reistijd);
 
         // Set text
         aantalOverstappen.setText(reisData.getChanges());
@@ -69,8 +75,14 @@ public class Reisadvies extends Fragment {
             @Override
             public void onClick(View view) {
                 // TODO: Add 'Vertrek' & 'Aankomst' from 'ReisData' to Firebase.
-                reisData.getDeparture();
-                reisData.getArrival();
+
+                // Put new object in database
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("allData").push().setValue(reisData);
+
+                fab.setEnabled(false);
+                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(android.R.color.darker_gray)));
+
             }
         });
 

@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/vertrek"
         android:textColor="@android:color/white"
-        android:textColorHint="@color/colorAccent" />
+        android:textColorHint="@color/colorAccent"
+        android:inputType="textCapWords"/>
 
     <TextView
         android:id="@+id/departureWarning"
@@ -31,7 +32,8 @@
         android:layout_marginTop="@dimen/half_side_margin"
         android:hint="@string/aankomst"
         android:textColor="@android:color/white"
-        android:textColorHint="@color/colorAccent" />
+        android:textColorHint="@color/colorAccent"
+        android:inputType="textCapWords"/>
 
     <TextView
         android:id="@+id/arrivalWarning"

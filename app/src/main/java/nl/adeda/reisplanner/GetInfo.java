@@ -41,8 +41,6 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
 
     @Override
     protected void onPreExecute() {
-        ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        progressBar.setVisibility(View.VISIBLE);
         super.onPreExecute();
 
     }
@@ -61,7 +59,7 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
 
-        // TODO: Parse XML
+        // Make Document from String (result)
         DocumentBuilder builder;
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
@@ -77,6 +75,7 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
         ReisData parsedData;
         Bundle bundle = null;
 
+        // Parse XML
         if (doc != null) {
             parsedData = XMLParser.parse(doc, data);
 

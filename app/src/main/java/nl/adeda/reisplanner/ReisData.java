@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 public class ReisData implements Serializable {
 
+    // Default constructor for Firebase
+    public ReisData() { }
+
     private String departure;
     private String arrival;
     private String changes;

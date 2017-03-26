@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 /**
@@ -79,6 +80,8 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
 
         // Start AsyncTask
         GetInfo asyncTask = new GetInfo(this, data);
+        ProgressBar progressBar = (ProgressBar) getView().findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         asyncTask.execute(data);
     }
 
