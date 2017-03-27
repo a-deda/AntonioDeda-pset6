@@ -34,6 +34,7 @@ public class MyTripsAdapter extends ArrayAdapter<ReisData> {
         TextView fromStation = (TextView) convertView.findViewById(R.id.vertrekStation);
         TextView toStation = (TextView) convertView.findViewById(R.id.aankomstStation);
 
+        // Set text to TextViews
         fromStation.setText(reisData.getDeparture());
         toStation.setText(reisData.getArrival());
 

@@ -10,13 +10,22 @@ import java.util.ArrayList;
 public class ReisData implements Serializable {
 
     // Default constructor for Firebase
-    public ReisData() { }
+    public ReisData() {  }
 
+    private String key;
     private String departure;
     private String arrival;
     private String changes;
     private String travelTime;
     private ArrayList<ReisDirections> directions;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 
     public String getDeparture() {
         return departure;

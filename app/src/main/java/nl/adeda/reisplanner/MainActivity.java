@@ -91,9 +91,6 @@ public class MainActivity extends AppCompatActivity
             if (fragment != new Reisplanner()) {
                 fragment = new Reisplanner();
             }
-        } else if (id == R.id.nav_stations) {
-            // Open 'Stations'
-            fragment = new Stations();
         }
 
         // Set fragment to content_main

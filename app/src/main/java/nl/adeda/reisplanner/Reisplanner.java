@@ -21,7 +21,6 @@ import android.widget.TextView;
 public class Reisplanner extends Fragment implements View.OnClickListener {
 
     ReisData data;
-    Fragment fragment = new Reisadvies();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -79,7 +78,7 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
         data.setArrival(arrivalStation);
 
         // Start AsyncTask
-        GetInfo asyncTask = new GetInfo(this, data);
+        GetInfo asyncTask = new GetInfo(this, data, 0);
         ProgressBar progressBar = (ProgressBar) getView().findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         asyncTask.execute(data);
@@ -87,7 +86,7 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
 
     public void startFragment(Fragment nextFragment) {
 
-        // Go to next fragment
+        // Go to Reisadvies fragment
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.content_main, nextFragment);
         transaction.addToBackStack(null);

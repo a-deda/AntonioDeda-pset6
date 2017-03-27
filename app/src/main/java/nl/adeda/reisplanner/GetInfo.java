@@ -1,5 +1,6 @@
 package nl.adeda.reisplanner;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,20 +31,29 @@ import javax.xml.parsers.ParserConfigurationException;
 public class GetInfo extends AsyncTask<ReisData, Integer, String> {
 
     Reisplanner reisPlanner;
-    View view;
+    MijnReizen mijnReizen;
     ReisData data;
+    int callerId;
 
-    public GetInfo(Reisplanner main, ReisData data) {
+    // Constructor for Reisplanner
+    public GetInfo(Reisplanner main, ReisData data, int callerId) {
         this.data = data;
-        this.reisPlanner = main;
-        view = reisPlanner.getView();
+        reisPlanner = main;
+        this.callerId = callerId;
+    }
+
+    // Constructor for MijnReizen
+    public GetInfo(MijnReizen main, ReisData data, int callerId) {
+        this.data = data;
+        mijnReizen = main;
+        this.callerId = callerId;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
     }
+
     @Override
     protected String doInBackground(ReisData... params) {
         try {
@@ -90,11 +100,11 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
             fragment.setArguments(bundle);
         }
 
-        this.reisPlanner.startFragment(fragment);
-
+        // Check calling class
+        if (callerId == 0) { // Called by Reisadvies
+            reisPlanner.startFragment(fragment);
+        } else if (callerId == 1) { // Called by MijnReizen
+            mijnReizen.startFragment(fragment);
+        }
     }
-
-
-
-
 }

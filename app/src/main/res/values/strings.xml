@@ -4,12 +4,13 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- Headers & titles -->
     <string name="action_settings">Settings</string>
     <string name="stations">Stations</string>
     <string name="reisplanner">Reisplanner</string>
     <string name="mijn_reizen">Mijn reizen</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- App information text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="plannen">Plannen</string>
     <string name="vertrek">Vertrek</string>
@@ -23,4 +24,6 @@
     <string name="station">Station</string>
     <string name="spoor">Spoor</string>
     <string name="menu">Menu</string>
+    <string name="van">Van</string>
+    <string name="naar">Naar</string>
 </resources>

@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/half_side_margin"
+        android:paddingTop="@dimen/half_side_margin">
 
         <TextView
             android:id="@+id/vertrekStationText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/van"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/vertrekStation"
@@ -24,12 +30,17 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/half_side_margin"
+        android:paddingBottom="@dimen/half_side_margin">
 
         <TextView
             android:id="@+id/aankomstStationText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/naar"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/aankomstStation"

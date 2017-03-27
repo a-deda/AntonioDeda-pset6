@@ -73,12 +73,11 @@ public class Reisadvies extends Fragment {
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // TODO: Add 'Vertrek' & 'Aankomst' from 'ReisData' to Firebase.
-
+            public void onClick(View view) { // Add 'Vertrek' & 'Aankomst' from 'ReisData' to Firebase.
                 // Put new object in database
                 mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("allData").push().setValue(reisData);
+                reisData.setKey(mDatabase.child("allData").push().getKey());
+                mDatabase.child("allData").child(reisData.getKey()).setValue(reisData);
 
                 fab.setEnabled(false);
                 fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(android.R.color.darker_gray)));
