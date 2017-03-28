@@ -31,22 +31,11 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Restore state when app is destroyed
-        savedState = getSharedPreferences("savedState", MODE_PRIVATE);
-        if (savedState != null) {
-            String className = savedState.getString("fragmentState", name);
-            fragment = selectTask(className);
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-        }
+        loadContent(savedInstanceState);
 
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        if (savedInstanceState != null) {
-            fragment = getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
-        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,6 +45,21 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void loadContent(Bundle savedInstanceState) {
+        // Restore state when app is destroyed
+        savedState = getSharedPreferences("savedState", MODE_PRIVATE);
+        if (savedState != null) {
+            String className = savedState.getString("fragmentState", name);
+            fragment = selectTask(className);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        }
+
+        if (savedInstanceState != null) {
+            fragment = getSupportFragmentManager().getFragment(savedInstanceState, "fragment");
+        }
     }
 
     @Override
