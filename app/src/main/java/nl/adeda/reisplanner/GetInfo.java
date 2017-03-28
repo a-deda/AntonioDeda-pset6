@@ -52,8 +52,8 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-    }
 
+    }
     @Override
     protected String doInBackground(ReisData... params) {
         try {
@@ -82,6 +82,10 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
             e.printStackTrace();
         }
 
+        startReisAdvies(doc);
+    }
+
+    private void startReisAdvies(Document doc) {
         ReisData parsedData;
         Bundle bundle = null;
 
@@ -100,11 +104,13 @@ public class GetInfo extends AsyncTask<ReisData, Integer, String> {
             fragment.setArguments(bundle);
         }
 
-        // Check calling class
         if (callerId == 0) { // Called by Reisadvies
             reisPlanner.startFragment(fragment);
         } else if (callerId == 1) { // Called by MijnReizen
             mijnReizen.startFragment(fragment);
         }
+
     }
+
+
 }

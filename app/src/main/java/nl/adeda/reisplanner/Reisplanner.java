@@ -61,7 +61,6 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
     }
 
     private void searchTrip() {
-
         // Make warnings invisible
         TextView departureWarning = (TextView) getView().findViewById(R.id.departureWarning);
         TextView arrivalWarning = (TextView) getView().findViewById(R.id.arrivalWarning);
@@ -80,10 +79,12 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
             if (arrivalStation.equals("")) {
                 arrivalWarning.setVisibility(View.VISIBLE);
             }
-
             return;
         }
+        startASyncTask(data, departureStation, arrivalStation);
+    }
 
+    private void startASyncTask(ReisData data, String departureStation, String arrivalStation) {
         // Put departure & arrival into model class
         data = new ReisData();
         data.setDeparture(departureStation);
@@ -94,6 +95,7 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
         ProgressBar progressBar = (ProgressBar) getView().findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
         asyncTask.execute(data);
+
     }
 
     public void startFragment(Fragment nextFragment) {

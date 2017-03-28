@@ -58,23 +58,9 @@ public class Reisadvies extends Fragment {
             reisData = (ReisData) bundle.getSerializable("data");
         //}
 
-        // No changes indicates a lack of trip information
+        // No changes indicates a lack of trip information, hide appropriate views
         if (reisData.getChanges() == null) {
-            TextView geenOpties = (TextView) view.findViewById(R.id.noOptionsText);
-            TextView reistijdText = (TextView) view.findViewById(R.id.reistijdText);
-            TextView overstappenText = (TextView) view.findViewById(R.id.overstappenText);
-            TextView tijdText = (TextView) view.findViewById(R.id.tijdText);
-            TextView stationText = (TextView) view.findViewById(R.id.stationText);
-            TextView spoorText = (TextView) view.findViewById(R.id.spoorText);
-
-            reistijdText.setVisibility(View.GONE);
-            overstappenText.setVisibility(View.GONE);
-            tijdText.setVisibility(View.GONE);
-            stationText.setVisibility(View.GONE);
-            spoorText.setVisibility(View.GONE);
-            fab.setVisibility(View.GONE);
-            geenOpties.setVisibility(View.VISIBLE);
-
+            hideViews(view);
             return;
         }
 
@@ -91,6 +77,11 @@ public class Reisadvies extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.reisList);
         listView.setAdapter(dataAdapter);
 
+        setFabOnClickListener();
+
+    }
+
+    private void setFabOnClickListener() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { // Add 'Vertrek' & 'Aankomst' from 'ReisData' to Firebase.
@@ -104,6 +95,24 @@ public class Reisadvies extends Fragment {
 
             }
         });
+    }
+
+    private void hideViews(View view) {
+        TextView geenOpties = (TextView) view.findViewById(R.id.noOptionsText);
+        TextView reistijdText = (TextView) view.findViewById(R.id.reistijdText);
+        TextView overstappenText = (TextView) view.findViewById(R.id.overstappenText);
+        TextView tijdText = (TextView) view.findViewById(R.id.tijdText);
+        TextView stationText = (TextView) view.findViewById(R.id.stationText);
+        TextView spoorText = (TextView) view.findViewById(R.id.spoorText);
+
+        reistijdText.setVisibility(View.GONE);
+        overstappenText.setVisibility(View.GONE);
+        tijdText.setVisibility(View.GONE);
+        stationText.setVisibility(View.GONE);
+        spoorText.setVisibility(View.GONE);
+        fab.setVisibility(View.GONE);
+        geenOpties.setVisibility(View.VISIBLE);
+
     }
 
     @Override
