@@ -1,10 +1,12 @@
 package nl.adeda.reisplanner;
 
+import java.io.Serializable;
+
 /**
  * Created by Antonio on 24-3-2017.
  */
 
-public class ReisDirections {
+public class ReisDirections implements Serializable {
 
     private String time;
     private String station;

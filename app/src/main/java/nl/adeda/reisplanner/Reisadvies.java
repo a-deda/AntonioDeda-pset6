@@ -25,6 +25,7 @@ public class Reisadvies extends Fragment {
     private DatabaseReference mDatabase;
     ReisData reisData;
     FloatingActionButton fab;
+    Bundle savedFragmentState;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -37,6 +38,17 @@ public class Reisadvies extends Fragment {
         reisData = (ReisData) bundle.getSerializable("data");
 
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
+
+        // Restore view
+        if (savedInstanceState != null && savedFragmentState == null) {
+            fab.setEnabled(savedInstanceState.getBoolean("fabEnabled"));
+            if (!fab.isEnabled()) {
+                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().
+                        getColor(android.R.color.darker_gray)));
+            }
+        } else if (savedFragmentState != null) {
+            reisData = (ReisData) savedFragmentState.getSerializable("data");
+        }
 
         // No changes indicates a lack of trip information
         if (reisData.getChanges() == null) {
@@ -84,13 +96,24 @@ public class Reisadvies extends Fragment {
 
             }
         });
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         return inflater.inflate(R.layout.content_reisadvies, container, false);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean("fabEnabled", fab.isEnabled());
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        savedFragmentState = new Bundle();
+        savedFragmentState.putSerializable("data", reisData);
+        super.onDestroyView();
     }
 }
