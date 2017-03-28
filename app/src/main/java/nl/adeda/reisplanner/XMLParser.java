@@ -17,8 +17,6 @@ import java.util.Date;
 
 public class XMLParser {
 
-
-
     public static ReisData parse(Document doc, ReisData data) {
 
         // Initialize ArrayList for directions objects

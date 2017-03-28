@@ -1,5 +1,6 @@
 package nl.adeda.reisplanner;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -22,10 +23,23 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Fragment fragment = null;
+    Fragment currentFragment;
+    String name;
+    SharedPreferences savedState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Restore state when app is destroyed
+        savedState = getSharedPreferences("savedState", MODE_PRIVATE);
+        if (savedState != null) {
+            String className = savedState.getString("fragmentState", name);
+            fragment = selectTask(className);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+        }
+
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -111,4 +125,29 @@ public class MainActivity extends AppCompatActivity
         super.onSaveInstanceState(outState);
     }
 
+    @Override
+    protected void onStop() {
+        currentFragment = getSupportFragmentManager().findFragmentById(R.id.content_main);
+        if (currentFragment != null) {
+            name = currentFragment.getClass().getName();
+            savedState = getSharedPreferences("savedState", MODE_PRIVATE);
+            SharedPreferences.Editor editor = savedState.edit();
+            editor.putString("fragmentState", name);
+            editor.commit();
+        }
+        super.onStop();
+
+    }
+
+    public Fragment selectTask(String className) {
+        switch (className) {
+            case "nl.adeda.reisplanner.Reisplanner":
+                return new Reisplanner();
+            case "nl.adeda.reisplanner.Reisadvies":
+                /*return new Reisadvies();*/ return new Reisplanner();
+            case "nl.adeda.reisplanner.MijnReizen":
+                return new MijnReizen();
+        }
+        return null;
+    }
 }

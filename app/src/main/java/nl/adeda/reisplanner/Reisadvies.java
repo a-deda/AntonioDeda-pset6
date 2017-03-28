@@ -1,5 +1,7 @@
 package nl.adeda.reisplanner;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
@@ -25,7 +28,7 @@ public class Reisadvies extends Fragment {
     private DatabaseReference mDatabase;
     ReisData reisData;
     FloatingActionButton fab;
-    Bundle savedFragmentState;
+    SharedPreferences savedFragmentState;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -33,22 +36,27 @@ public class Reisadvies extends Fragment {
 
         getActivity().setTitle("Reisadvies");
 
-        // Get bundle containing 'reisData'
-        Bundle bundle = this.getArguments();
-        reisData = (ReisData) bundle.getSerializable("data");
-
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
-
+        /*savedFragmentState = this.getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
         // Restore view
         if (savedInstanceState != null && savedFragmentState == null) {
+            reisData = (ReisData) savedInstanceState.getSerializable("data");
             fab.setEnabled(savedInstanceState.getBoolean("fabEnabled"));
             if (!fab.isEnabled()) {
                 fab.setBackgroundTintList(ColorStateList.valueOf(getResources().
                         getColor(android.R.color.darker_gray)));
             }
         } else if (savedFragmentState != null) {
-            reisData = (ReisData) savedFragmentState.getSerializable("data");
+            Gson gson = new Gson();
+            String json = savedFragmentState.getString("reisDataObj", "");
+            reisData = gson.fromJson(json, ReisData.class);
+            savedFragmentState = null;
         }
+        else {
+            */// Get bundle containing 'reisData'
+            Bundle bundle = this.getArguments();
+            reisData = (ReisData) bundle.getSerializable("data");
+        //}
 
         // No changes indicates a lack of trip information
         if (reisData.getChanges() == null) {
@@ -111,9 +119,16 @@ public class Reisadvies extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        savedFragmentState = new Bundle();
-        savedFragmentState.putSerializable("data", reisData);
-        super.onDestroyView();
+    public void onDestroy() {
+        savedFragmentState = this.getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = savedFragmentState.edit();
+
+        // Convert object to JSON
+        Gson gson = new Gson();
+        String json = gson.toJson(reisData);
+        editor.putString("reisDataObj", json);
+        editor.commit();
+
+        super.onDestroy();
     }
 }

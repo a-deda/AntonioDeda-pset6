@@ -1,5 +1,6 @@
 package nl.adeda.reisplanner;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +22,9 @@ import android.widget.TextView;
 public class Reisplanner extends Fragment implements View.OnClickListener {
 
     ReisData data;
+    SharedPreferences sharedPreferences;
+    EditText departure;
+    EditText arrival;
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -28,9 +32,21 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
 
         getActivity().setTitle("Reisplanner");
 
+        // Get views
+        departure = (EditText) getView().findViewById(R.id.departureText);
+        arrival = (EditText) getView().findViewById(R.id.arrivalText);
+
+        // Get SharedPreferences
+        sharedPreferences = this.getActivity().getSharedPreferences("savedState", Context.MODE_PRIVATE);
+        if (sharedPreferences != null) {
+            departure.setText(sharedPreferences.getString("departure", ""));
+            arrival.setText(sharedPreferences.getString("arrival", ""));
+        }
+
         // OnClickListener for 'Plannen' button
         Button button = (Button) view.findViewById(R.id.planButton);
         button.setOnClickListener(this);
+
     }
 
     @Override
@@ -45,10 +61,6 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
     }
 
     private void searchTrip() {
-
-        // Get views
-        EditText departure = (EditText) getView().findViewById(R.id.departureText);
-        EditText arrival = (EditText) getView().findViewById(R.id.arrivalText);
 
         // Make warnings invisible
         TextView departureWarning = (TextView) getView().findViewById(R.id.departureWarning);
@@ -93,4 +105,15 @@ public class Reisplanner extends Fragment implements View.OnClickListener {
         transaction.commit();
     }
 
+    @Override
+    public void onStop() {
+        if(!departure.getText().toString().equals("") && !arrival.getText().toString().equals("")) {
+            sharedPreferences = this.getActivity().getSharedPreferences("savedState", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("departureText", departure.getText().toString());
+            editor.putString("arrivalText", arrival.getText().toString());
+            editor.commit();
+        }
+        super.onStop();
+    }
 }
